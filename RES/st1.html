@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Sport</title>
+    <link rel="stylesheet" href="../RES/style.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .embed-responsive {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+      }
+      .embed-responsive::before {
+        display: block;
+        content: "";
+        padding-top: 56.25%; /* 16:9 aspect ratio */
+      }
+      .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .fullscreen-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <h1>Star Sport</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RES/st1.html">Star Sport 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RES/st2.html">Star Sport 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RES/st3.html">Star Sport 3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RES/ht2.html">Sky Sport</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Embedded Player Section -->
+    <div class="container my-4">
+      <div
+        class="embed-responsive embed-responsive-16by9"
+        id="player-container"
+      >
+        <button class="fullscreen-btn" onclick="toggleFullscreen()">
+          Fullscreen
+        </button>
+        <iframe
+          src="//stream.crichd.vip/update/star.php"
+          width="100%"
+          height="500px"
+          marginheight="0"
+          marginwidth="0"
+          scrolling="no"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="sinhala">
+        ඔබ වීඩියෝව ක්ලික් කරන විට වෙනත් වෙබ් පිටු කරා යන්නේ නම් නැවත මෙම වෙබ්
+        පිටුවටම පිවිසෙන්න. වෙනත් වෙබ් පිටු වලින් නැරබිය නොහැක.
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <p>&copy; 2024 Your Company</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function toggleFullscreen() {
+        const playerContainer = document.getElementById("player-container");
+        if (!document.fullscreenElement) {
+          if (playerContainer.requestFullscreen) {
+            playerContainer.requestFullscreen();
+          } else if (playerContainer.mozRequestFullScreen) {
+            /* Firefox */
+            playerContainer.mozRequestFullScreen();
+          } else if (playerContainer.webkitRequestFullscreen) {
+            /* Chrome, Safari and Opera */
+            playerContainer.webkitRequestFullscreen();
+          } else if (playerContainer.msRequestFullscreen) {
+            /* IE/Edge */
+            playerContainer.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      }
+
+      // Prevent iframe from navigating to another page
+      document.getElementById("player").addEventListener("load", function () {
+        const iframeDocument =
+          this.contentDocument || this.contentWindow.document;
+        iframeDocument.addEventListener(
+          "click",
+          function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          },
+          true
+        );
+      });
+    </script>
+  </body>
+</html>
